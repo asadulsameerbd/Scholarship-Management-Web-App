@@ -1,0 +1,116 @@
+[
+  {
+    "_id": 1,
+    "universityName": "Harvard University",
+    "universityLogo": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=250&fit=crop",
+    "scholarshipCategory": "Merit-Based",
+    "location": {
+      "country": "United States",
+      "city": "Cambr_idge, Massachusetts"
+    },
+    "applicationDeadline": "2025-03-31",
+    "subjectCategory": "Computer Science",
+    "scholarshipDescription": "This merit-based scholarship supports outstanding students pursuing undergraduate or graduate studies in Computer Science at Harvard University.",
+    "stipend": "$2,000 per month",
+    "postDate": "2025-01-10",
+    "serviceCharge": "$50",
+    "applicationFees": "$75",
+    "rating": 4.8,
+    "detailsButton": "View Scholarship Details"
+  },
+  {
+    "_id": 2,
+    "universityName": "University of Oxford",
+    "universityLogo": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
+    "scholarshipCategory": "Need-Based",
+    "location": {
+      "country": "United Kingdom",
+      "city": "Oxford"
+    },
+    "applicationDeadline": "2025-04-15",
+    "subjectCategory": "Business Administration",
+    "scholarshipDescription": "A need-based scholarship designed to assist international students with limited financial resources studying Business Administration at Oxford.",
+    "stipend": "£1,500 per month",
+    "postDate": "2025-01-18",
+    "serviceCharge": "£40",
+    "applicationFees": "£60",
+    "rating": 4.7,
+    "detailsButton": "View Scholarship Details"
+  },
+  {
+    "_id": 3,
+    "universityName": "University of Toronto",
+    "universityLogo": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
+    "scholarshipCategory": "International Students",
+    "location": {
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    "applicationDeadline": "2025-05-10",
+    "subjectCategory": "Electrical Engineering",
+    "scholarshipDescription": "This scholarship is offered to international students demonstrating academic excellence in Electrical Engineering programs.",
+    "stipend": "CAD 1,800 per month",
+    "postDate": "2025-02-01",
+    "serviceCharge": "CAD 30",
+    "applicationFees": "CAD 90",
+    "rating": 4.6,
+    "detailsButton": "View Scholarship Details"
+  },
+  {
+    "_id": 4,
+    "universityName": "University of Melbourne",
+    "universityLogo": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=400&h=250&fit=crop",
+    "scholarshipCategory": "Research-Based",
+    "location": {
+      "country": "Australia",
+      "city": "Melbourne"
+    },
+    "applicationDeadline": "2025-06-01",
+    "subjectCategory": "Medical Science",
+    "scholarshipDescription": "A research-focused scholarship supporting postgraduate students in Medical Science research programs.",
+    "stipend": "AUD 2,200 per month",
+    "postDate": "2025-02-12",
+    "serviceCharge": "AUD 60",
+    "applicationFees": "AUD 100",
+    "rating": 4.5,
+    "detailsButton": "View Scholarship Details"
+  },
+  {
+    "_id": 5,
+    "universityName": "Technical University of Munich",
+    "universityLogo": "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=400&h=250&fit=crop",
+    "scholarshipCategory": "Government Funded",
+    "location": {
+      "country": "Germany",
+      "city": "Munich"
+    },
+    "applicationDeadline": "2025-04-30",
+    "subjectCategory": "Artificial Intelligence",
+    "scholarshipDescription": "A government-funded scholarship for international students pursuing advanced studies in Artificial Intelligence.",
+    "stipend": "€1,200 per month",
+    "postDate": "2025-01-28",
+    "serviceCharge": "Free",
+    "applicationFees": "Free",
+    "rating": 4.7,
+    "detailsButton": "View Scholarship Details"
+  },
+  {
+    "_id": 6,
+    "universityName": "National University of Singapore",
+    "universityLogo": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop",
+    "scholarshipCategory": "Fully Funded",
+    "location": {
+      "country": "Singapore",
+      "city": "Singapore"
+    },
+    "applicationDeadline": "2025-03-20",
+    "subjectCategory": "Data Science",
+    "scholarshipDescription": "A fully funded scholarship covering tuition, living expenses, and research costs for Data Science students.",
+    "stipend": "SGD 2,000 per month",
+    "postDate": "2025-01-05",
+    "serviceCharge": "SGD 50",
+    "applicationFees": "SGD 50",
+    "rating": 4.9,
+    "detailsButton": "View Scholarship Details"
+  }
+]

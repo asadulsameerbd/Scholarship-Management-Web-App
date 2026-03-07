@@ -1,0 +1,14 @@
+.hero-img {
+  position: relative;
+  background-image: url("../../../assets/Image/hero-section.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hero-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 37, 48, 0.7);
+  z-index: 1;
+}
