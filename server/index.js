@@ -22,7 +22,8 @@ async function run() {
     const database = client.db("ScholarshipsDB");
     const scholarshipCollection = database.collection("scholarships");
 
-    app.get("/", async (req, res) => {
+    // read all-scholarships
+    app.get("/all-scholarships", async (req, res) => {
       const allScholarships = await scholarshipCollection.find().toArray();
       res.send(allScholarships);
     });
@@ -34,7 +35,7 @@ async function run() {
       const result = await scholarshipCollection.insertOne(scholarships);
       res
         .status(201)
-        .send(...result, { message: "scholarships are created successfull" });
+        .send(result, { message: "scholarships are created successfull" });
     });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
