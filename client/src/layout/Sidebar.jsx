@@ -94,7 +94,7 @@ const Sidebar = () => {
 
             <li>
               <NavLink
-                to="/dashboard/manage_scholarship"
+                to="/dashboard/manage_scholarships"
                 className="flex items-center gap-2"
               >
                 <MdManageAccounts />

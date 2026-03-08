@@ -32,7 +32,23 @@ async function run() {
 
     app.post("/add-scholarships", async (req, res) => {
       const scholarships = req.body;
+
+      const application_fees = scholarships.application_fees;
+      scholarships.application_fees = parseInt(application_fees);
+      const tution_fees = scholarships.tution_fees;
+      scholarships.tution_fees = parseInt(tution_fees);
+      const service_charge = scholarships.service_charge;
+      scholarships.service_charge = parseInt(service_charge);
+      const university_rank = scholarships.university_rank;
+      scholarships.university_rank = parseInt(university_rank);
+
+      const application_deadline = scholarships.application_deadline;
+      scholarships.application_deadline = new Date(application_deadline);
+      const scholarship_post_date = scholarships.scholarship_post_date;
+      scholarships.scholarship_post_date = new Date(scholarship_post_date);
+
       const result = await scholarshipCollection.insertOne(scholarships);
+      console.log(result);
       res
         .status(201)
         .send(result, { message: "scholarships are created successfull" });

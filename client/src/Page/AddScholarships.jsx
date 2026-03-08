@@ -47,11 +47,11 @@ const AddScholarships = () => {
   };
 
   return (
-    <div className="pb-4 bg-yellow-400/20 h-full lg:h-screen">
-      <h1 className="text-center text-sm md:text-2xl font-bold bg-yellow-400 pt-5 pb-2">
+    <div className="pb-4 bg-[#001E2D]/20 h-full lg:h-screen">
+      <h1 className="text-center text-sm md:text-2xl font-bold bg-[#001E2D] text-white pt-5 pb-2">
         Welcome to Add Scholarship Page
       </h1>
-      <p className="text-center bg-yellow-400 text-xs md:text-sm pb-5">
+      <p className="text-center bg-[#001E2D] text-white text-xs pt-3 md:text-sm pb-5">
         Please fill up the information to Add a Scholarship
       </p>
 
@@ -119,15 +119,6 @@ const AddScholarships = () => {
                     className="input input-bordered w-full"
                     placeholder="University World Rank"
                   />
-
-                  <label className="label font-semibold">
-                    Scholarship Post Date
-                  </label>
-                  <input
-                    type="date"
-                    {...register("scholarship_post_date")}
-                    className="input input-bordered w-full"
-                  />
                 </div>
 
                 {/* Right Side */}
@@ -190,15 +181,6 @@ const AddScholarships = () => {
                     {...register("service_charge")}
                     className="input input-bordered w-full"
                     placeholder="Enter Service Charge"
-                  />
-
-                  <label className="label font-semibold">
-                    Application Deadline
-                  </label>
-                  <input
-                    type="date"
-                    {...register("application_deadline")}
-                    className="input input-bordered w-full"
                   />
 
                   <button

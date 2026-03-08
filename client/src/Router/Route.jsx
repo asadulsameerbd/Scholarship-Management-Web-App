@@ -12,6 +12,7 @@ import AuthLayout from "../layout/AuthLayout";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../Page/Dashboard/Dashboard";
 import AddScholarships from "../Page/AddScholarships";
+import ManageScholarships from "../Page/ManageScholarships";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/add_scholarships",
         Component: AddScholarships,
+      },
+      {
+        path: "/dashboard/manage_scholarships",
+        Component: ManageScholarships,
       },
     ],
   },
