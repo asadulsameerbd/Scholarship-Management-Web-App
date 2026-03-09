@@ -35,6 +35,16 @@ const Registration = () => {
         photoURL: img,
       });
 
+      // send user to backend
+      const user = {
+        name: fullName,
+        photo: img,
+        email: email,
+        createdAt: new Date(),
+      };
+
+      axios.post(`${import.meta.env.VITE_localhost_api}/users`, user);
+
       Swal.fire({
         title: "Success!",
         text: `${result.user.email} is created Successfully`,

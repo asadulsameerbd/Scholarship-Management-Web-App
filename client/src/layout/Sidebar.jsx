@@ -74,7 +74,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/dashboard/admin_profile"
+                to="/dashboard/profile"
                 className="flex items-center gap-2"
               >
                 <FaUser />

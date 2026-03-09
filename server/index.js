@@ -21,7 +21,49 @@ async function run() {
   try {
     const database = client.db("ScholarshipsDB");
     const scholarshipCollection = database.collection("scholarships");
+    const userCollections = database.collection("users");
 
+    // add user to backend
+    app.post("/users", async (req, res) => {
+      const userInfo = req.body;
+      userInfo.createdAt = new Date(userInfo.createdAt);
+      const result = await userCollections.insertOne(userInfo);
+      res.status(201).send({ message: "User Created Successfully", result });
+    });
+
+    // read user api
+    app.get("/users", async (req, res) => {
+      const result = await userCollections.find().toArray();
+      res.send(result);
+    });
+
+    // specifiq user data read
+    app.get("/users/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email };
+      const result = await userCollections.findOne(filter);
+      if (!result) {
+        return res.status(404).send({ message: "user not found" });
+      }
+      res.send(result);
+    });
+
+    // update user info
+    app.patch("/users/:email", async (req, res) => {
+      const email = req.params.email;
+      const userBody = req.body;
+      const filter = { email: email };
+
+      const updateDoc = {
+        $set: userBody,
+      };
+
+      const result = await userCollections.updateOne(filter, updateDoc);
+
+      res
+        .status(200)
+        .send({ message: "User Info Updated Successfully!", result });
+    });
     // read all-scholarships
     app.get("/all-scholarships", async (req, res) => {
       const allScholarships = await scholarshipCollection.find().toArray();
@@ -51,7 +93,7 @@ async function run() {
       console.log(result);
       res
         .status(201)
-        .send(result, { message: "scholarships are created successfull" });
+        .send({ message: "scholarships are created successfull", result });
     });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

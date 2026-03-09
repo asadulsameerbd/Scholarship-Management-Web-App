@@ -13,6 +13,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../Page/Dashboard/Dashboard";
 import AddScholarships from "../Page/AddScholarships";
 import ManageScholarships from "../Page/ManageScholarships";
+import Profile from "../Page/Dashboard/Admin/Profile";
+import UpdateProfile from "../Page/Dashboard/Admin/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/manage_scholarships",
         Component: ManageScholarships,
+      },
+      {
+        path: "/dashboard/profile",
+        Component: Profile,
+      },
+      {
+        path: "/dashboard/update_profile/:email",
+        Component: UpdateProfile,
       },
     ],
   },
