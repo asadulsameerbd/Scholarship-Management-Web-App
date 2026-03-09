@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Loading from "../../../Components/Common/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import UseAuth from "../../../Hook/useAuth";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../Firebase/init_firebase";
@@ -14,7 +14,6 @@ const UpdateProfile = () => {
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setUser } = UseAuth();
-  const navigate = useNavigate();
 
   // Fetch user data
   const { data, isLoading, error } = useQuery({
@@ -121,7 +120,7 @@ const UpdateProfile = () => {
                 type="text"
                 className="input"
                 name="name"
-                defaultValue={data?.displayName || ""}
+                defaultValue={data?.displayName || data?.name || ""}
                 required
               />
 

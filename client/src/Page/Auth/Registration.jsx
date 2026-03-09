@@ -40,6 +40,7 @@ const Registration = () => {
         name: fullName,
         photo: img,
         email: email,
+        role: "student",
         createdAt: new Date(),
       };
 

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const AddScholarships = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     try {
       const formData = new FormData();
 
@@ -34,7 +36,9 @@ const AddScholarships = () => {
         scholarshipData,
       );
 
-      if (res.data.insertedId) {
+      console.log(res);
+
+      if (res.data.result.insertedId) {
         toast.success("Scholarship Added Successfully");
       }
 
@@ -185,9 +189,10 @@ const AddScholarships = () => {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="btn bg-black text-white btn-soft transition-all duration-100 hover:scale-102 hover:bg-yellow-400 hover:text-black mt-4 w-full"
                   >
-                    Add Scholarship
+                    {isSubmitting ? "Added Scholarship" : "Add Scholarship"}
                   </button>
 
                   <ToastContainer />

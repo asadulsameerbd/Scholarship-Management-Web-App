@@ -64,6 +64,20 @@ async function run() {
         .status(200)
         .send({ message: "User Info Updated Successfully!", result });
     });
+
+    // delete user api
+    app.delete("/users/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email: email };
+
+      const result = await userCollections.deleteOne(filter);
+
+      if (result.deletedCount > 0) {
+        res.status(200).send({ message: "User Delete Successfully!" });
+      } else {
+        res.status(404).send({ message: "User Not Found" });
+      }
+    });
     // read all-scholarships
     app.get("/all-scholarships", async (req, res) => {
       const allScholarships = await scholarshipCollection.find().toArray();
@@ -90,7 +104,7 @@ async function run() {
       scholarships.scholarship_post_date = new Date(scholarship_post_date);
 
       const result = await scholarshipCollection.insertOne(scholarships);
-      console.log(result);
+
       res
         .status(201)
         .send({ message: "scholarships are created successfull", result });

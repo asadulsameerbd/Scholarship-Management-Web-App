@@ -15,6 +15,7 @@ import AddScholarships from "../Page/AddScholarships";
 import ManageScholarships from "../Page/ManageScholarships";
 import Profile from "../Page/Dashboard/Admin/Profile";
 import UpdateProfile from "../Page/Dashboard/Admin/UpdateProfile";
+import ManageUsers from "../Page/Dashboard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/update_profile/:email",
         Component: UpdateProfile,
+      },
+      {
+        path: "/dashboard/manage_users",
+        Component: ManageUsers,
       },
     ],
   },
