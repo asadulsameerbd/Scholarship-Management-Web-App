@@ -1,17 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
-import { MdLocationPin } from "react-icons/md";
-import { Link } from "react-router";
-
 const Universities = () => {
-  const [scholarshipsData, setScholarshipsData] = useState([]);
-
-  useEffect(() => {
-    fetch("/Scholarship.json")
-      .then((data) => data.json())
-      .then((data) => setScholarshipsData(data));
-  }, []);
-
   return (
     <div>
       <div>
