@@ -17,6 +17,7 @@ import Profile from "../Page/Dashboard/Admin/Profile";
 import UpdateProfile from "../Page/Dashboard/Admin/UpdateProfile";
 import ManageUsers from "../Page/Dashboard/Admin/ManageUsers";
 import ScholarshipDetails from "../Page/Scholarships/ScholarshipDetails";
+import AppliedScholarships from "../Page/Scholarships/AppliedScholarships";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/manage_users",
         Component: ManageUsers,
+      },
+      {
+        path: "/dashboard/applied_scholarship",
+        Component: AppliedScholarships,
       },
     ],
   },

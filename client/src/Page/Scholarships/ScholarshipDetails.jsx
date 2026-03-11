@@ -6,6 +6,7 @@ import Error from "../Error/Error";
 import { MdLocationPin } from "react-icons/md";
 import Swal from "sweetalert2";
 import UseAuth from "../../Hook/useAuth";
+import Review from "../Review/Review";
 
 const ScholarshipDetails = () => {
   const { id } = useParams();
@@ -105,11 +106,13 @@ const ScholarshipDetails = () => {
               </p>
 
               <p>
-                <b>Application Deadline :</b> {data?.application_deadline}
+                <b>Application Deadline :</b>{" "}
+                {new Date(data?.application_deadline).toLocaleDateString()}
               </p>
 
               <p>
-                <b>Post Date :</b> {data?.scholarship_post_date}
+                <b>Post Date :</b>{" "}
+                {new Date(data?.scholarship_post_date).toLocaleDateString()}
               </p>
 
               <p>
@@ -138,6 +141,10 @@ const ScholarshipDetails = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="md:max-w-7xl my-3 lg:mx-auto mx-4 ">
+        <Review scholarshipId={data._id} user={user} />
       </div>
     </div>
   );
