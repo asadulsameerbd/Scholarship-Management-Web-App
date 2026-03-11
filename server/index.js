@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 3000;
@@ -22,6 +22,45 @@ async function run() {
     const database = client.db("ScholarshipsDB");
     const scholarshipCollection = database.collection("scholarships");
     const userCollections = database.collection("users");
+    const appliedScholarshipsCollections = database.collection(
+      "appliedScholarships",
+    );
+
+    // applied scholarship
+    app.post("/applied_scholarship", async (req, res) => {
+      const scholarshipBody = req.body;
+
+      const { userEmail, scholarshipId } = scholarshipBody;
+
+      const alreadyApplied = await appliedScholarshipsCollections.findOne({
+        userEmail: userEmail,
+        scholarshipId: scholarshipId,
+      });
+
+      if (alreadyApplied) {
+        return res
+          .status(400)
+          .send({ message: "This Scholarship is Already Applied" });
+      }
+
+      const result =
+        await appliedScholarshipsCollections.insertOne(scholarshipBody);
+
+      if (!result) {
+        return res.status(404).send("Scholarships are not Applied");
+      }
+
+      res.send("Scholarship Applied", result);
+    });
+
+    // read applied scholarship api
+    app.get("/applied_scholarship", async (req, res) => {
+      const appliedScholarship = await appliedScholarshipsCollections
+        .find()
+        .toArray();
+
+      res.send(appliedScholarship);
+    });
 
     // add user to backend
     app.post("/users", async (req, res) => {
@@ -99,15 +138,34 @@ async function run() {
       scholarships.university_rank = parseInt(university_rank);
 
       const application_deadline = scholarships.application_deadline;
-      scholarships.application_deadline = new Date(application_deadline);
+      scholarships.application_deadline = new Date(
+        application_deadline,
+      ).toLocaleDateString();
       const scholarship_post_date = scholarships.scholarship_post_date;
-      scholarships.scholarship_post_date = new Date(scholarship_post_date);
+      scholarships.scholarship_post_date = new Date(
+        scholarship_post_date,
+      ).toLocaleDateString();
 
       const result = await scholarshipCollection.insertOne(scholarships);
 
       res
         .status(201)
         .send({ message: "scholarships are created successfull", result });
+    });
+
+    // read specifiq data usign id
+    app.get("/all-scholarships/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const filter = { _id: new ObjectId(id) };
+
+      const result = await scholarshipCollection.findOne(filter);
+
+      if (!result) {
+        res.status(404).send({ message: "Scholarships Not Found" });
+      }
+
+      res.send(result);
     });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

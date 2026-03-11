@@ -1,31 +1,41 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdLocationPin } from "react-icons/md";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Components/Common/Loading";
+import Error from "../Error/Error";
 
 const Scholarships = () => {
-  const [scholarshipsData, setScholarshipsData] = useState([]);
-
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [subject, setSubject] = useState("all");
   const [sort, setSort] = useState("recent");
 
-  useEffect(() => {
-    const fetchScholarships = async () => {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_localhost_api}/all-scholarships`,
-        );
-        setScholarshipsData(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const fetchscholarData = async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_localhost_api}/all-scholarships`,
+    );
+    return res.data;
+  };
 
-    fetchScholarships();
-  }, []);
+  const {
+    data: scholarshipsData = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["scholarships"],
+    queryFn: fetchscholarData,
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
 
   // 🔎 Filter + Sort Logic
   const filteredData = scholarshipsData
@@ -140,11 +150,11 @@ const Scholarships = () => {
             key={university._id}
             className="card flex flex-col md:flex-row mb-5 card-side bg-base-100 shadow-sm"
           >
-            <figure className="w-full md:w-80 h-48 rounded-lg m-4 overflow-hidden">
+            <figure className="w-full md:w-80 h-48 rounded-lg m-4 overflow-hidden ">
               <img
                 src={university.university_logo}
                 alt={university.university_name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition transform duration-300 hover:scale-105"
               />
             </figure>
 
@@ -168,7 +178,7 @@ const Scholarships = () => {
                 </p>
 
                 <Link
-                  to={`/universities/${university._id}`}
+                  to={`/scholarships/${university._id}`}
                   className="btn rounded-xl border-2 border-[#00202F] bg-white text-[#00202F] hover:bg-[#00202F] hover:text-white"
                 >
                   View Details
