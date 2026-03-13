@@ -18,6 +18,8 @@ import UpdateProfile from "../Page/Dashboard/Admin/UpdateProfile";
 import ManageUsers from "../Page/Dashboard/Admin/ManageUsers";
 import ScholarshipDetails from "../Page/Scholarships/ScholarshipDetails";
 import AppliedScholarships from "../Page/Scholarships/AppliedScholarships";
+import Review from "../Page/Review/Review";
+import ManageReview from "../Page/Review/ManageReview";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/applied_scholarship",
         Component: AppliedScholarships,
+      },
+      {
+        path: "/dashboard/manage_review",
+        Component: ManageReview,
       },
     ],
   },

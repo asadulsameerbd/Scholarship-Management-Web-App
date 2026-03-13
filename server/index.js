@@ -25,6 +25,44 @@ async function run() {
     const appliedScholarshipsCollections = database.collection(
       "appliedScholarships",
     );
+    const reviewCollections = database.collection("reviews");
+
+    // review
+    app.post("/reviews", async (req, res) => {
+      const reviewData = req.body;
+
+      const result = await reviewCollections.insertOne(reviewData);
+
+      res.send({
+        message: "Review Added Successfully",
+        insertedId: result.insertedId,
+      });
+    });
+
+    // read review data
+    app.get("/reviews", async (req, res) => {
+      const result = await reviewCollections.find().toArray();
+      res.send(result);
+    });
+
+    // specifiq scholarship review
+    app.get("/reviews/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const filter = { scholarshipId: id };
+
+      const result = await reviewCollections.find(filter).toArray();
+
+      res.send(result);
+    });
+
+    // delete specifiq review
+    app.delete("/reviews/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await reviewCollections.deleteOne(filter);
+      res.send(result);
+    });
 
     // applied scholarship
     app.post("/applied_scholarship", async (req, res) => {

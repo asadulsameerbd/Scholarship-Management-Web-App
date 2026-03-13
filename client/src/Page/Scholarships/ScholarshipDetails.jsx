@@ -144,7 +144,7 @@ const ScholarshipDetails = () => {
       </div>
 
       <div className="md:max-w-7xl my-3 lg:mx-auto mx-4 ">
-        <Review scholarshipId={data._id} user={user} />
+        <Review _id={data._id} user={user} />
       </div>
     </div>
   );

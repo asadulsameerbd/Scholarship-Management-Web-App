@@ -33,7 +33,6 @@ const ManageUsers = () => {
     return res.data;
   };
 
-  console.log(data);
   return (
     <div>
       {" "}

@@ -25,7 +25,6 @@ const ManageScholarships = () => {
     return <Error />;
   }
 
-  console.log(data);
   return (
     <div>
       <h1 className="text-center text-sm md:text-2xl font-bold bg-[#001E2D] text-white pt-5 pb-2">
