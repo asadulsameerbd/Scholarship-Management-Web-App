@@ -1,12 +1,16 @@
 import axios from "axios";
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../Components/Common/Loading";
 import Error from "./Error/Error";
 import { FaEye, FaStreetView, FaUserEdit } from "react-icons/fa";
 import { MdCancel, MdDeleteForever, MdGridView } from "react-icons/md";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const ManageScholarships = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { data, isLoading, error, isFetching } = useQuery({
     queryKey: ["allScholarships"],
     queryFn: async () => {
@@ -24,6 +28,22 @@ const ManageScholarships = () => {
   if (error) {
     return <Error />;
   }
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_localhost_api}/all-scholarships/${id}`,
+      );
+
+      queryClient.invalidateQueries("deleteScholarships");
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: { err },
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <div>
@@ -76,13 +96,19 @@ const ManageScholarships = () => {
                 </td>
 
                 <td className="block md:table-cell p-2">
-                  <button className="btn btn-sm btn-success ml-2">
+                  <button
+                    onClick={() => navigate(`/scholarships/${item._id}`)}
+                    className="btn btn-sm btn-success ml-2"
+                  >
                     <FaEye />
                   </button>
                   <button className="btn btn-sm bg-blue-300 ml-2">
                     <FaUserEdit />
                   </button>
-                  <button className="btn btn-sm btn-error m-2">
+                  <button
+                    onClick={() => handleDelete(item?._id)}
+                    className="btn btn-sm btn-error m-2"
+                  >
                     <MdCancel />
                   </button>
                 </td>

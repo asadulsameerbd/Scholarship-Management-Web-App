@@ -64,7 +64,7 @@ async function run() {
       res.send(result);
     });
 
-    // applied scholarship
+    // mt=y applied scholarship
     app.post("/applied_scholarship", async (req, res) => {
       const scholarshipBody = req.body;
 
@@ -89,6 +89,22 @@ async function run() {
       }
 
       res.send("Scholarship Applied", result);
+    });
+
+    // admin route: get all applied scholarships
+    app.get("/admin/applied_scholarship", async (req, res) => {
+      const allApplied = await appliedScholarshipsCollections.find().toArray();
+      res.send(allApplied);
+    });
+
+    // read specifiq my applied application
+    app.get("/applied_scholarship/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { userEmail: email };
+      const result = await appliedScholarshipsCollections
+        .find(filter)
+        .toArray();
+      res.send(result);
     });
 
     // read applied scholarship api
@@ -189,6 +205,18 @@ async function run() {
       res
         .status(201)
         .send({ message: "scholarships are created successfull", result });
+    });
+
+    // delete scholarships
+    app.delete("/all-scholarships/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await scholarshipCollection.deleteOne(filter);
+
+      if (!result.deletedCount > 0) {
+        res.status(404).send({ message: "kam Saira falaichen bhai file nai" });
+      }
+      res.send(result);
     });
 
     // read specifiq data usign id

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AddScholarships = () => {
+  const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
@@ -36,7 +38,7 @@ const AddScholarships = () => {
         scholarshipData,
       );
 
-      console.log(res);
+      (queryClient.invalidateQueries("Scholarship Uploaded"), console.log(res));
 
       if (res.data.result.insertedId) {
         toast.success("Scholarship Added Successfully");
@@ -47,6 +49,8 @@ const AddScholarships = () => {
     } catch (error) {
       toast.error("Upload failed");
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -189,10 +193,9 @@ const AddScholarships = () => {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
                     className="btn bg-black text-white btn-soft transition-all duration-100 hover:scale-102 hover:bg-yellow-400 hover:text-black mt-4 w-full"
                   >
-                    {isSubmitting ? "Added Scholarship" : "Add Scholarship"}
+                    {isSubmitting ? "Adding Scholarship..." : "Add Scholarship"}
                   </button>
 
                   <ToastContainer />

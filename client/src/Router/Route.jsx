@@ -20,6 +20,7 @@ import ScholarshipDetails from "../Page/Scholarships/ScholarshipDetails";
 import AppliedScholarships from "../Page/Scholarships/AppliedScholarships";
 import Review from "../Page/Review/Review";
 import ManageReview from "../Page/Review/ManageReview";
+import MyApplication from "../Page/Dashboard/MyApplication";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Dashboard,
+      },
+      {
+        path: "/dashboard/my_application",
+        Component: MyApplication,
       },
       {
         path: "/dashboard/add_scholarships",

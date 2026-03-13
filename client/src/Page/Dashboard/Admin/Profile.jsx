@@ -3,9 +3,12 @@ import UseAuth from "../../../Hook/useAuth";
 import Loading from "../../../Components/Common/Loading";
 import { RiEditBoxFill } from "react-icons/ri";
 import { Link } from "react-router";
+import axios from "axios";
 
 const Profile = () => {
-  const { user, isLoading } = UseAuth();
+  const { user, isLoading, role } = UseAuth();
+
+  axios.get(`${import.meta.env.VITE_locahost_api}/users`);
 
   if (isLoading) {
     return <Loading />;
@@ -39,6 +42,12 @@ const Profile = () => {
             </h1>
             <h1 className="text-base md:text-lg mt-2">
               Email: <span className="font-bold">{user?.email}</span>
+            </h1>
+            <h1 className="mt-2">
+              Role:
+              <span className="ml-2 px-3 py-1 bg-green-100 text-green-600 rounded-full">
+                {role}
+              </span>
             </h1>
             <div className="card-actions justify-start md:justify-end mt-4">
               {user?.email && (

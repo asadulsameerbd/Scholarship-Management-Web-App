@@ -16,7 +16,7 @@ const AppliedScholarships = () => {
     queryKey: ["appliedScholarships", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_localhost_api}/applied_scholarship`,
+        `${import.meta.env.VITE_localhost_api}/admin/applied_scholarship`,
       );
       return res.data;
     },

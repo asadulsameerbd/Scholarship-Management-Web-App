@@ -13,9 +13,30 @@ import {
 } from "react-icons/fa";
 
 import { MdAddBox, MdManageAccounts } from "react-icons/md";
-import Navbar from "../Components/Shared/Navbar";
+import UseAuth from "../Hook/useAuth";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
+  const { user, logOut, role } = UseAuth();
+
+  // Logout
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      Swal.fire({
+        title: "Success!",
+        text: `${user?.email} Logout Successfully`,
+        icon: "success",
+      });
+    } catch (e) {
+      Swal.fire({
+        title: "Error!",
+        text: `${e.message}`,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <div className="drawer w-full lg:drawer-open">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
@@ -40,7 +61,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className=" w-full">
+        <div className="w-full">
           <Outlet />
         </div>
       </div>
@@ -50,97 +71,126 @@ const Sidebar = () => {
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 
         <aside className="w-72 min-h-full bg-base-200 p-5">
-          <Link
-            to="/"
-            className="flex gap-2 text-2xl font-bold mb-6 text-center"
-          >
+          <Link to="/" className="flex gap-2 text-2xl font-bold mb-6">
             <img className="w-10" src={logo} alt="" />
             ScholarHub
           </Link>
 
           <ul className="menu gap-2">
+            {/* Dashboard */}
             <li>
               <NavLink
                 to="/dashboard"
-                className={({ isActive }) => {
-                  isActive
-                    ? "bg-gray-500 w-full text-white"
-                    : "bg-white text-black";
-                }}
+                className={({ isActive }) =>
+                  isActive ? "bg-gray-500 text-white" : ""
+                }
               >
                 <FaTachometerAlt />
                 Dashboard
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/profile"
-                className="flex items-center gap-2"
-              >
-                <FaUser />
-                Admin Profile
-              </NavLink>
-            </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/add_scholarships"
-                className="flex items-center gap-2"
-              >
-                <MdAddBox />
-                Add Scholarships
-              </NavLink>
-            </li>
+            {/* Admin Menu */}
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/profile">
+                    <FaUser /> Admin Profile
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/manage_scholarships"
-                className="flex items-center gap-2"
-              >
-                <MdManageAccounts />
-                Manage Scholarship
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink to="/dashboard/add_scholarships">
+                    <MdAddBox /> Add Scholarships
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/applied_scholarship"
-                className="flex items-center gap-2"
-              >
-                <FaUserGraduate />
-                Applied Applications
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink to="/dashboard/manage_scholarships">
+                    <MdManageAccounts /> Manage Scholarship
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/manage_users"
-                className="flex items-center gap-2"
-              >
-                <FaUsers />
-                Manage Users
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink to="/dashboard/applied_scholarship">
+                    <FaUserGraduate /> Applied Applications
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/manage_review"
-                className="flex items-center gap-2"
-              >
-                <FaStar />
-                Manage Review
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink to="/dashboard/manage_users">
+                    <FaUsers /> Manage Users
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/manage_review">
+                    <FaStar /> Manage Review
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Moderator Menu */}
+            {role === "moderator" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/profile">
+                    <FaUser /> Profile
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/add_scholarships">
+                    <MdAddBox /> Add Scholarships
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/manage_scholarships">
+                    <MdManageAccounts /> Manage Scholarship
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/applied_scholarship">
+                    <FaUserGraduate /> Applied Applications
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Student Menu */}
+            {role === "student" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/profile">
+                    <FaUser /> Profile
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/my_application">
+                    <FaUserGraduate /> My Application
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             <div className="divider"></div>
 
+            {/* Logout */}
             <li>
-              <button className="flex items-center gap-2 text-red-500">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-2 text-red-500"
+              >
                 <FaSignOutAlt />
                 Logout
               </button>
             </li>
 
+            {/* Home */}
             <li>
               <NavLink to="/" className="flex items-center gap-2">
                 <FaHome />
