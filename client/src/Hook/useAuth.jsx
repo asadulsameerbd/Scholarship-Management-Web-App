@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import Loading from "../Components/Common/Loading";
 
 const UseAuth = () => {
-  const { loading, logOut, user, setUser, createUser, signIn, setIsLoading } =
+  const { logOut, user, setUser, createUser, signIn, setIsLoading } =
     useContext(AuthContext);
 
   const { data: role, isLoading } = useQuery({
@@ -26,7 +27,7 @@ const UseAuth = () => {
     setIsLoading,
     role,
     logOut,
-    isLoading: loading || isLoading,
+    isLoading,
   };
 };
 
