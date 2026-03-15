@@ -21,6 +21,7 @@ import AppliedScholarships from "../Page/Scholarships/AppliedScholarships";
 import Review from "../Page/Review/Review";
 import ManageReview from "../Page/Review/ManageReview";
 import MyApplication from "../Page/Dashboard/MyApplication";
+import AccessPage from "../Page/AccessPage";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
         Component: ScholarshipDetails,
       },
 
-      { path: "universities", Component: Universities },
+      { path: "website-access", Component: AccessPage },
       // scholarships details page
 
       { path: "about", Component: About },

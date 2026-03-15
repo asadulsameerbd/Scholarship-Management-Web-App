@@ -8,7 +8,7 @@ import Loading from "../Common/Loading";
 const menuItems = [
   { name: "Home", path: "/" },
   { name: "All Scholarships", path: "/scholarships" },
-  { name: "Universities", path: "/universities" },
+  { name: "Access Page", path: "/website-access" },
   { name: "About", path: "/about" },
 ];
 

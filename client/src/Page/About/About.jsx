@@ -161,7 +161,7 @@ const About = () => {
                 <img
                   src={img}
                   alt="Team Member"
-                  className="w-full h-56 object-cover transform transition-all duration-500 ease-in-out hover:scale-110"
+                  className="w-full h-86 object-cover transform transition-all duration-500 ease-in-out hover:scale-110"
                 />
               </div>
               <div className="p-4 text-center">
