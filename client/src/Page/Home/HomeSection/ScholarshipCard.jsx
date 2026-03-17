@@ -85,7 +85,7 @@ const ScholarshipCard = () => {
               <b>Subject :</b> {scholarship.subjectCategory}
             </p>
 
-            {/* location
+            {/* location */}
             <div className="flex flex-wrap gap-3 text-sm mb-4">
               <p className="text-white">
                 <b>City :</b>{" "}
@@ -96,7 +96,7 @@ const ScholarshipCard = () => {
                 <b>Country :</b>{" "}
                 <span className="text-yellow-400">{scholarship.country}</span>
               </p>
-            </div> */}
+            </div>
 
             <div className="divider"></div>
 
