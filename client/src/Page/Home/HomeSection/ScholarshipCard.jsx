@@ -12,11 +12,11 @@ const ScholarshipCard = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        setLoading(true);
-        const res = await axios.get("/Scholarship.json");
+        const res = await axios.get(
+          `${import.meta.env.VITE_localhost_api}/all-scholarships`,
+        );
         setScholarships(res.data);
       } catch (err) {
-        console.error(err);
         setError("Failed to load scholarships");
       } finally {
         setLoading(false);
@@ -26,27 +26,23 @@ const ScholarshipCard = () => {
     fetchScholarships();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
-  if (error) {
-    return <p className="text-center text-red-500 py-20">{error}</p>;
-  }
+  if (error) return <p className="text-center text-red-500 py-20">{error}</p>;
 
   return (
-    <section>
-      {/* upper content */}
-      <h1 className="text-2xl md:text-4xl font-bold text-center pt-5 pb-5">
+    <section className="px-4">
+      {/* Title */}
+      <h1 className="text-2xl md:text-4xl font-bold text-center pt-10 pb-4">
         Top <span className="text-yellow-400">Scholarships</span>
       </h1>
-      <p className="text-lg text-center text-gray-500 font-kalam pb-5">
-        Discover top scholarship opportunities handpicked for ambitious
-        students.
+
+      <p className="text-sm md:text-lg text-center text-gray-500 pb-6">
+        Discover top scholarship opportunities handpicked for ambitious students
       </p>
 
       {/* divider */}
-      <div className="flex justify-center mb-12">
+      <div className="flex justify-center mb-10">
         <svg width="120" height="20" viewBox="0 0 120 20">
           <path
             d="M0 10 C15 0, 30 0, 45 10
@@ -59,77 +55,79 @@ const ScholarshipCard = () => {
         </svg>
       </div>
 
-      <div className="lg:max-w-7xl  mx-auto pb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Grid */}
+      <div className="max-w-7xl mx-auto pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {scholarships.map((scholarship) => (
           <div
             key={scholarship._id}
-            className="card mx-5 lg:mx-0 bg-[#001E2D] p-3 shadow-sm rounded-2xl pb-5"
+            className="bg-[#001E2D] rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-5"
           >
-            <div className="badge rounded-2xl ml-5 mt-4 bg-[#00202F] text-yellow-400">
+            {/* category badge */}
+            <div className="badge bg-[#00202F] text-yellow-400 border-none mb-4">
               {scholarship.scholarshipCategory}
             </div>
 
-            <div className="flex items-center gap-4 p-5">
+            {/* university info */}
+            <div className="flex items-center gap-4 mb-4">
               <img
-                className="w-14 rounded"
+                className="w-12 h-12 object-cover rounded"
                 src={scholarship.universityLogo}
-                alt={`${scholarship.universityName} logo`}
+                alt=""
               />
-              <h2 className="text-xl font-medium text-white">
+
+              <h2 className="text-lg font-semibold text-white line-clamp-1">
                 {scholarship.universityName}
               </h2>
             </div>
 
-            <p className="text-white pl-5 pb-3 text-sm">
+            {/* subject */}
+            <p className="text-white text-sm mb-3">
               <b>Subject :</b> {scholarship.subjectCategory}
             </p>
 
-            {/* university location */}
-            <div className="flex items-center ">
-              <p className="text-white  pl-5 text-sm">
-                <b>City : </b>
-                <span className="text-yellow-400">
-                  {scholarship.location.city}
-                </span>
+            {/* location
+            <div className="flex flex-wrap gap-3 text-sm mb-4">
+              <p className="text-white">
+                <b>City :</b>{" "}
+                <span className="text-yellow-400">{scholarship.city}</span>
               </p>
-              <p className="text-white pl-5 text-sm">
-                <b>Country : </b>
-                <span className="text-yellow-400">
-                  {scholarship.location.country}
-                </span>
+
+              <p className="text-white">
+                <b>Country :</b>{" "}
+                <span className="text-yellow-400">{scholarship.country}</span>
               </p>
-            </div>
+            </div> */}
 
-            <div className="divider mx-5"></div>
+            <div className="divider"></div>
 
-            <div className="mx-5 flex justify-between py-5">
+            {/* fee + deadline */}
+            <div className="flex justify-between items-center mb-4">
               <div>
-                <h3 className="text-2xl">
-                  <b className="text-white"> Fee : </b>
-
+                <h3 className="text-lg font-semibold text-white">
+                  Fee :{" "}
                   <span className="text-yellow-400">
                     {scholarship.applicationFees}
                   </span>
                 </h3>
-                <p className="text-gray-400 text-sm">Application Fee</p>
+
+                <p className="text-gray-400 text-xs">Application Fee</p>
               </div>
 
-              <div>
-                <h3 className="font-medium text-yellow-400">
+              <div className="text-right">
+                <h3 className="text-yellow-400 text-sm font-medium">
                   {scholarship.applicationDeadline}
                 </h3>
-                <p className="text-gray-400 text-sm">Deadline</p>
+                <p className="text-gray-400 text-xs">Deadline</p>
               </div>
             </div>
 
-            <div className="flex justify-center mx-5">
-              <button
-                onClick={() => navigate(`universities/${scholarship._id}`)}
-                className="btn w-full rounded-2xl hover:scale-102 border-2 border-[#00202F] bg-white text-[#00202F] hover:bg-yellow-400 hover:text-black"
-              >
-                View Details
-              </button>
-            </div>
+            {/* button */}
+            <button
+              onClick={() => navigate(`/universities/${scholarship._id}`)}
+              className="btn w-full rounded-xl bg-white text-[#00202F] border-none hover:bg-yellow-400 hover:text-black transition"
+            >
+              View Details
+            </button>
           </div>
         ))}
       </div>
