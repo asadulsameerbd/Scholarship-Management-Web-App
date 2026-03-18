@@ -22,6 +22,7 @@ import Review from "../Page/Review/Review";
 import ManageReview from "../Page/Review/ManageReview";
 import MyApplication from "../Page/Dashboard/MyApplication";
 import AccessPage from "../Page/AccessPage";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "scholarships/:id",
-        Component: ScholarshipDetails,
+        element: (
+          <PrivateRoutes>
+            <ScholarshipDetails />
+          </PrivateRoutes>
+        ),
       },
 
       { path: "website-access", Component: AccessPage },
@@ -70,39 +75,75 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Dashboard,
+        element: (
+          <PrivateRoutes>
+            <Dashboard />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/my_application",
-        Component: MyApplication,
+        element: (
+          <PrivateRoutes>
+            <MyApplication />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/add_scholarships",
-        Component: AddScholarships,
+        element: (
+          <PrivateRoutes>
+            <AddScholarships />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/manage_scholarships",
-        Component: ManageScholarships,
+        element: (
+          <PrivateRoutes>
+            <ManageScholarships />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/profile",
-        Component: Profile,
+        element: (
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/update_profile/:email",
-        Component: UpdateProfile,
+        element: (
+          <PrivateRoutes>
+            <UpdateProfile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/manage_users",
-        Component: ManageUsers,
+        element: (
+          <PrivateRoutes>
+            <ManageUsers />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/applied_scholarship",
-        Component: AppliedScholarships,
+        element: (
+          <PrivateRoutes>
+            <AppliedScholarships />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/manage_review",
-        Component: ManageReview,
+        element: (
+          <PrivateRoutes>
+            <ManageReview />
+          </PrivateRoutes>
+        ),
       },
     ],
   },

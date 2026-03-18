@@ -86,14 +86,14 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex">
-          <ul className="menu menu-horizontal px-1">
+        <div className="hidden  md:flex items-center">
+          <ul className="menu menu-horizontal  px-1">
             {menuItems.map((item, i) => (
               <li key={i}>
                 <NavLink
                   to={item.path}
                   className={({ isActive }) =>
-                    `px-3 py-2 rounded ${
+                    `lg:px-3 px-2 py-2 rounded ${
                       isActive ? "bg-base-content text-white" : ""
                     }`
                   }
