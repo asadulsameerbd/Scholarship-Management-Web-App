@@ -3,7 +3,6 @@ import axios from "axios";
 import UseAuth from "../../Hook/useAuth";
 import Loading from "../../Components/Common/Loading";
 import Error from "../Error/Error";
-import { Link } from "react-router";
 
 const AppliedScholarships = () => {
   const { user } = UseAuth();
@@ -36,6 +35,11 @@ const AppliedScholarships = () => {
     }
   };
 
+  // sorted
+  const sortApplication = [...appliedScholarships].sort(
+    (a, b) => new Date(b.appliedDate) - new Date(a.appliedDate),
+  );
+
   if (isLoading) return <Loading />;
   if (error) return <Error />;
 
@@ -61,7 +65,7 @@ const AppliedScholarships = () => {
           </thead>
 
           <tbody>
-            {appliedScholarships.map((item, index) => (
+            {sortApplication.map((item, index) => (
               <tr key={item._id} className="hover">
                 <th>{index + 1}</th>
 
