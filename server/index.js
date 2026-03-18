@@ -67,6 +67,7 @@ async function run() {
     // mt=y applied scholarship
     app.post("/applied_scholarship", async (req, res) => {
       const scholarshipBody = req.body;
+      scholarshipBody.status = "pending";
 
       const { userEmail, scholarshipId } = scholarshipBody;
 
@@ -92,9 +93,32 @@ async function run() {
     });
 
     // admin route: get all applied scholarships
-    app.get("/admin/applied_scholarship", async (req, res) => {
+    app.get("/applied_scholarship", async (req, res) => {
       const allApplied = await appliedScholarshipsCollections.find().toArray();
       res.send(allApplied);
+    });
+
+    // admin route : read specific applied scholarships data
+    app.patch("/applied_scholarship/:id", async (req, res) => {
+      const id = req.params.id;
+      const { status } = req.body;
+
+      const filter = { _id: new ObjectId(id) };
+
+      const updateDoc = {
+        $set: {
+          status: status,
+        },
+      };
+
+      const result = await appliedScholarshipsCollections.updateOne(
+        filter,
+        updateDoc,
+      );
+
+      res
+        .status(200)
+        .send({ message: "Applied scholarships Status Updated" }, result);
     });
 
     // read specifiq my applied application
@@ -105,15 +129,6 @@ async function run() {
         .find(filter)
         .toArray();
       res.send(result);
-    });
-
-    // read applied scholarship api
-    app.get("/applied_scholarship", async (req, res) => {
-      const appliedScholarship = await appliedScholarshipsCollections
-        .find()
-        .toArray();
-
-      res.send(appliedScholarship);
     });
 
     // add user to backend
@@ -195,10 +210,8 @@ async function run() {
       scholarships.application_deadline = new Date(
         application_deadline,
       ).toLocaleDateString();
-      const scholarship_post_date = scholarships.scholarship_post_date;
-      scholarships.scholarship_post_date = new Date(
-        scholarship_post_date,
-      ).toLocaleDateString();
+
+      scholarships.scholarship_post_date = new Date().toLocaleDateString();
 
       const result = await scholarshipCollection.insertOne(scholarships);
 

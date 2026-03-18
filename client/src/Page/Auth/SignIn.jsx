@@ -9,7 +9,7 @@ const SignIn = () => {
   const { signIn } = UseAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
+
   const from = location?.state?.from?.pathname || "/";
   const {
     register,
@@ -18,8 +18,6 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     try {
       const result = await signIn(data.email, data.password);
       console.log("result", result);

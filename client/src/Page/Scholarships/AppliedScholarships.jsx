@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import UseAuth from "../../Hook/useAuth";
 import Loading from "../../Components/Common/Loading";
@@ -7,6 +7,7 @@ import { Link } from "react-router";
 
 const AppliedScholarships = () => {
   const { user } = UseAuth();
+  const queryClient = useQueryClient();
 
   const {
     data: appliedScholarships = [],
@@ -16,19 +17,27 @@ const AppliedScholarships = () => {
     queryKey: ["appliedScholarships", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_localhost_api}/admin/applied_scholarship`,
+        `${import.meta.env.VITE_localhost_api}/applied_scholarship`,
       );
       return res.data;
     },
   });
 
+  const handleStatusChange = async (id, status) => {
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_localhost_api}/applied_scholarship/${id}`,
+        { status },
+      );
+
+      queryClient.invalidateQueries(["appliedScholarships", user?.email]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (isLoading) return <Loading />;
   if (error) return <Error />;
-
-  // filter current user data
-  const myApplications = appliedScholarships.filter(
-    (item) => item.userEmail === user?.email,
-  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -52,7 +61,7 @@ const AppliedScholarships = () => {
           </thead>
 
           <tbody>
-            {myApplications.map((item, index) => (
+            {appliedScholarships.map((item, index) => (
               <tr key={item._id} className="hover">
                 <th>{index + 1}</th>
 
@@ -65,19 +74,24 @@ const AppliedScholarships = () => {
                 <td>{new Date(item.appliedDate).toLocaleDateString()}</td>
 
                 <td>
-                  <Link
-                    to={`/universities/${item.scholarshipId}`}
-                    className="btn btn-sm bg-[#012131] text-white hover:bg-[#F39C12]"
+                  <select
+                    className="select select-sm bg-[#012131] text-white"
+                    value={item.status || "pending"}
+                    onChange={(e) =>
+                      handleStatusChange(item._id, e.target.value)
+                    }
                   >
-                    View
-                  </Link>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        {myApplications.length === 0 && (
+        {appliedScholarships.length === 0 && (
           <p className="text-center py-6 text-gray-500">
             You haven't applied for any scholarships yet.
           </p>

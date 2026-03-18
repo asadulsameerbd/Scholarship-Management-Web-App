@@ -83,67 +83,35 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/my_application",
-        element: (
-          <PrivateRoutes>
-            <MyApplication />
-          </PrivateRoutes>
-        ),
+        element: <MyApplication />,
       },
       {
         path: "/dashboard/add_scholarships",
-        element: (
-          <PrivateRoutes>
-            <AddScholarships />
-          </PrivateRoutes>
-        ),
+        element: <AddScholarships />,
       },
       {
         path: "/dashboard/manage_scholarships",
-        element: (
-          <PrivateRoutes>
-            <ManageScholarships />
-          </PrivateRoutes>
-        ),
+        element: <ManageScholarships />,
       },
       {
         path: "/dashboard/profile",
-        element: (
-          <PrivateRoutes>
-            <Profile />
-          </PrivateRoutes>
-        ),
+        element: <Profile />,
       },
       {
         path: "/dashboard/update_profile/:email",
-        element: (
-          <PrivateRoutes>
-            <UpdateProfile />
-          </PrivateRoutes>
-        ),
+        element: <UpdateProfile />,
       },
       {
         path: "/dashboard/manage_users",
-        element: (
-          <PrivateRoutes>
-            <ManageUsers />
-          </PrivateRoutes>
-        ),
+        element: <ManageUsers />,
       },
       {
         path: "/dashboard/applied_scholarship",
-        element: (
-          <PrivateRoutes>
-            <AppliedScholarships />
-          </PrivateRoutes>
-        ),
+        element: <AppliedScholarships />,
       },
       {
         path: "/dashboard/manage_review",
-        element: (
-          <PrivateRoutes>
-            <ManageReview />
-          </PrivateRoutes>
-        ),
+        element: <ManageReview />,
       },
     ],
   },

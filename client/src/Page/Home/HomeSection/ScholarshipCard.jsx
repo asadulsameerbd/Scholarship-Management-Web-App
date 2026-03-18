@@ -15,7 +15,9 @@ const ScholarshipCard = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_localhost_api}/all-scholarships`,
         );
-        setScholarships(res.data);
+
+        // 👉 only first 6 data
+        setScholarships(res.data.slice(0, 6));
       } catch (err) {
         setError("Failed to load scholarships");
       } finally {
@@ -27,7 +29,6 @@ const ScholarshipCard = () => {
   }, []);
 
   if (loading) return <Loading />;
-
   if (error) return <p className="text-center text-red-500 py-20">{error}</p>;
 
   return (
@@ -63,38 +64,42 @@ const ScholarshipCard = () => {
             className="bg-[#001E2D] rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-5"
           >
             {/* category badge */}
-            <div className="badge bg-[#00202F] text-yellow-400 border-none mb-4">
-              {scholarship.scholarshipCategory}
+            <div className="badge bg-[#00202F] text-yellow-400  border p-4 mb-4">
+              {scholarship.scholarship_category}
             </div>
 
             {/* university info */}
             <div className="flex items-center gap-4 mb-4">
               <img
                 className="w-12 h-12 object-cover rounded"
-                src={scholarship.universityLogo}
+                src={scholarship.university_logo}
                 alt=""
               />
 
               <h2 className="text-lg font-semibold text-white line-clamp-1">
-                {scholarship.universityName}
+                {scholarship.university_name}
               </h2>
             </div>
 
             {/* subject */}
             <p className="text-white text-sm mb-3">
-              <b>Subject :</b> {scholarship.subjectCategory}
+              <b>Subject :</b> {scholarship.subject_category}
             </p>
 
             {/* location */}
             <div className="flex flex-wrap gap-3 text-sm mb-4">
               <p className="text-white">
                 <b>City :</b>{" "}
-                <span className="text-yellow-400">{scholarship.city}</span>
+                <span className="text-yellow-400">
+                  {scholarship.university_city || "N/A"}
+                </span>
               </p>
 
               <p className="text-white">
                 <b>Country :</b>{" "}
-                <span className="text-yellow-400">{scholarship.country}</span>
+                <span className="text-yellow-400">
+                  {scholarship.university_country}
+                </span>
               </p>
             </div>
 
@@ -106,7 +111,7 @@ const ScholarshipCard = () => {
                 <h3 className="text-lg font-semibold text-white">
                   Fee :{" "}
                   <span className="text-yellow-400">
-                    {scholarship.applicationFees}
+                    {scholarship.application_fees}
                   </span>
                 </h3>
 
@@ -115,7 +120,9 @@ const ScholarshipCard = () => {
 
               <div className="text-right">
                 <h3 className="text-yellow-400 text-sm font-medium">
-                  {scholarship.applicationDeadline}
+                  {scholarship.application_deadline !== "Invalid Date"
+                    ? scholarship.application_deadline
+                    : "No Deadline"}
                 </h3>
                 <p className="text-gray-400 text-xs">Deadline</p>
               </div>
@@ -123,7 +130,7 @@ const ScholarshipCard = () => {
 
             {/* button */}
             <button
-              onClick={() => navigate(`/universities/${scholarship._id}`)}
+              onClick={() => navigate(`/scholarships/${scholarship._id}`)}
               className="btn w-full rounded-xl bg-white text-[#00202F] border-none hover:bg-yellow-400 hover:text-black transition"
             >
               View Details

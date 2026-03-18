@@ -182,6 +182,15 @@ const AddScholarships = () => {
                     className="input input-bordered w-full"
                     placeholder="Enter Application Fees"
                   />
+                  <label className="label font-semibold">
+                    Application Deadline
+                  </label>
+                  <input
+                    type="date"
+                    {...register("application_deadline")}
+                    className="input input-bordered w-full"
+                    placeholder="Enter Application Fees"
+                  />
 
                   <label className="label font-semibold">Service Charge</label>
                   <input
