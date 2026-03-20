@@ -42,7 +42,7 @@ const MyApplication = () => {
       <h1 className="text-2xl font-bold mb-5">My Applications</h1>
 
       <div className="grid gap-4">
-        {myApplications.map((app) => (
+        {/* {myApplications.map((app) => (
           <div
             key={app._id}
             className="border border-yellow-950 rounded p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition"
@@ -72,7 +72,7 @@ const MyApplication = () => {
               </p>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
