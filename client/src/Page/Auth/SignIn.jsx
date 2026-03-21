@@ -37,7 +37,7 @@ const SignIn = () => {
   };
   return (
     <div className="hero bg-base-200 h-200">
-      {/* <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">
             Sign in <span className="text-yellow-500">now!</span>{" "}
@@ -89,7 +89,7 @@ const SignIn = () => {
             </p>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
