@@ -73,7 +73,7 @@ const Registration = () => {
         </div>
 
         {/* form */}
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        {/* <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleSubmit(onsubmit)} className="fieldset">
               <label className="label">Full Name</label>
@@ -140,7 +140,7 @@ const Registration = () => {
               </Link>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
