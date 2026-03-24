@@ -82,7 +82,7 @@ const Sidebar = () => {
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
-                  isActive ? "bg-gray-500 text-white" : ""
+                  isActive ? "bg-[#001E2D] text-white" : ""
                 }
               >
                 <FaTachometerAlt />
@@ -94,37 +94,67 @@ const Sidebar = () => {
             {role === "admin" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/profile">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/profile"
+                  >
                     <FaUser /> Admin Profile
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/add_scholarships">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/add_scholarships"
+                  >
                     <MdAddBox /> Add Scholarships
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/manage_scholarships">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/manage_scholarships"
+                  >
                     <MdManageAccounts /> Manage Scholarship
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/applied_scholarship">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/applied_scholarship"
+                  >
                     <FaUserGraduate /> Applied Applications
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/manage_users">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/manage_users"
+                  >
                     <FaUsers /> Manage Users
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/manage_review">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/manage_review"
+                  >
                     <FaStar /> Manage Review
                   </NavLink>
                 </li>
@@ -135,25 +165,45 @@ const Sidebar = () => {
             {role === "moderator" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/profile">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/profile"
+                  >
                     <FaUser /> Profile
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/add_scholarships">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/add_scholarships"
+                  >
                     <MdAddBox /> Add Scholarships
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/manage_scholarships">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/manage_scholarships"
+                  >
                     <MdManageAccounts /> Manage Scholarship
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/applied_scholarship">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/applied_scholarship"
+                  >
                     <FaUserGraduate /> Applied Applications
                   </NavLink>
                 </li>
@@ -164,13 +214,23 @@ const Sidebar = () => {
             {role === "student" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/profile">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/profile"
+                  >
                     <FaUser /> Profile
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to="/dashboard/my_application">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "bg-gray-500 text-white" : ""
+                    }
+                    to="/dashboard/my_application"
+                  >
                     <FaUserGraduate /> My Application
                   </NavLink>
                 </li>
