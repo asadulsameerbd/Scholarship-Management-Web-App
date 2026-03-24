@@ -41,6 +41,7 @@ const ScholarshipDetails = () => {
       await axios.post(
         `${import.meta.env.VITE_localhost_api}/applied_scholarship`,
         appliedScholarship,
+        { withCredentials: true },
       );
 
       Swal.fire({

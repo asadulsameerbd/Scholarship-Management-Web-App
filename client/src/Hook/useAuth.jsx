@@ -14,6 +14,7 @@ const UseAuth = () => {
     queryFn: async () => {
       const res = await axios.get(
         `${import.meta.env.VITE_localhost_api}/users/${user.email}`,
+        { withCredentials: true },
       );
       return res.data.role;
     },

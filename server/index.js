@@ -3,10 +3,36 @@ const express = require("express");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
+app.use(cookieParser());
+
+// verify token
+
+const verifyToken = (req, res, next) => {
+  const token = req?.cookies?.token;
+  if (!token) {
+    return res.status(401).send({ message: "unauthorized access" });
+  }
+  jwt.verify(token, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "unauthorized access" });
+    }
+
+    req.decoded = decoded;
+
+    next();
+  });
+};
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.MONGO_URI, {
@@ -26,6 +52,23 @@ async function run() {
       "appliedScholarships",
     );
     const reviewCollections = database.collection("reviews");
+
+    // generate token
+    app.post("/jwt", async (req, res) => {
+      const userInfo = req.body;
+      const token = await jwt.sign(userInfo, process.env.JWT_ACCESS_SECRET, {
+        expiresIn: "1d",
+      });
+
+      // set to cookie
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+      });
+
+      res.send({ success: true, token });
+    });
 
     // review
     app.post("/reviews", async (req, res) => {
@@ -64,32 +107,28 @@ async function run() {
       res.send(result);
     });
 
-    // mt=y applied scholarship
-    app.post("/applied_scholarship", async (req, res) => {
+    // my applied scholarship
+    app.post("/applied_scholarship", verifyToken, async (req, res) => {
       const scholarshipBody = req.body;
       scholarshipBody.status = "pending";
 
-      const { userEmail, scholarshipId } = scholarshipBody;
+      // cookie to email verify
+      if (scholarshipBody.userEmail !== req.decoded.userEmail) {
+        return res.status(403).send({ message: "Forbidden Access" });
+      }
 
       const alreadyApplied = await appliedScholarshipsCollections.findOne({
-        userEmail: userEmail,
-        scholarshipId: scholarshipId,
+        userEmail: scholarshipBody.userEmail,
+        scholarshipId: scholarshipBody.scholarshipId,
       });
 
       if (alreadyApplied) {
-        return res
-          .status(400)
-          .send({ message: "This Scholarship is Already Applied" });
+        return res.status(400).send({ message: "Already Applied" });
       }
 
       const result =
         await appliedScholarshipsCollections.insertOne(scholarshipBody);
-
-      if (!result) {
-        return res.status(404).send("Scholarships are not Applied");
-      }
-
-      res.send("Scholarship Applied", result);
+      res.send({ message: "Scholarship Applied", result });
     });
 
     // admin route: get all applied scholarships
@@ -121,10 +160,14 @@ async function run() {
         .send({ message: "Applied scholarships Status Updated" }, result);
     });
 
-    // read specifiq my applied application
-    app.get("/applied_scholarship/:email", async (req, res) => {
+    // read specifiq my  application
+    app.get("/applied_scholarship/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
+      if (email !== req.decoded.userEmail) {
+        return res.status(403).send({ message: "Forbidden Access" });
+      }
       const filter = { userEmail: email };
+
       const result = await appliedScholarshipsCollections
         .find(filter)
         .toArray();
@@ -146,8 +189,11 @@ async function run() {
     });
 
     // specifiq user data read
-    app.get("/users/:email", async (req, res) => {
+    app.get("/users/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
+      if (email !== req.decoded.userEmail) {
+        return res.status(403).send({ message: "Forbidden Access" });
+      }
       const filter = { email };
       const result = await userCollections.findOne(filter);
       if (!result) {

@@ -17,6 +17,7 @@ const MyApplication = () => {
     queryFn: async () => {
       const res = await axios.get(
         `${import.meta.env.VITE_localhost_api}/applied_scholarship/${user?.email}`,
+        { withCredentials: true },
       );
       return res.data;
     },
