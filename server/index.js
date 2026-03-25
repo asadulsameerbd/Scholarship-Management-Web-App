@@ -203,8 +203,12 @@ async function run() {
     });
 
     // update user info
-    app.patch("/users/:email", async (req, res) => {
+    app.patch("/users/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
+
+      if (email !== req.decoded.userEmail) {
+        return res.status(403).send({ message: "Forbidden Access" });
+      }
       const userBody = req.body;
       const filter = { email: email };
 

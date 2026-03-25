@@ -22,6 +22,7 @@ const UpdateProfile = () => {
     queryFn: async () => {
       const res = await axios.get(
         `${import.meta.env.VITE_localhost_api}/users/${email}`,
+        { withCredentials: true },
       );
       return res.data;
     },
@@ -67,6 +68,7 @@ const UpdateProfile = () => {
       await axios.patch(
         `${import.meta.env.VITE_localhost_api}/users/${email}`,
         updatedUser,
+        { withCredentials: true },
       );
 
       // Refetch updated data
