@@ -10,7 +10,7 @@ import { auth } from "../Firebase/init_firebase";
 import axios from "axios";
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   // create user
@@ -31,10 +31,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setIsLoading(false);
 
       if (currentUser?.email) {
-        const userEmail = currentUser?.email;
+        const userEmail = currentUser.email;
+
         axios
           .post(
             `${import.meta.env.VITE_localhost_api}/jwt`,
@@ -42,13 +42,16 @@ const AuthProvider = ({ children }) => {
             { withCredentials: true },
           )
           .then((res) => res.data)
-          .catch((err) => {
-            console.log(err);
+          .catch((err) => console.log(err))
+          .finally(() => {
+            setIsLoading(false);
           });
+      } else {
+        setIsLoading(false);
       }
-
-      return () => unSubscribe();
     });
+
+    return () => unSubscribe();
   }, []);
 
   // sign out user

@@ -83,11 +83,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/my_application",
-        element: (
-          <PrivateRoutes>
-            <MyApplication />
-          </PrivateRoutes>
-        ),
+        element: <MyApplication />,
       },
       {
         path: "/dashboard/add_scholarships",
