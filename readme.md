@@ -51,7 +51,8 @@ A full-stack web application designed to simplify scholarship discovery, applica
 
 ## 📸 Screenshots
 
-_Add your project screenshots here_
+<img width="2938" height="2463" alt="Natural Mockup Freebie Lead Magnet Facebook Post" src="https://github.com/user-attachments/assets/a43e2ced-9876-4fa6-8c5f-2406b45d6b5a" />
+
 
 ---
 
