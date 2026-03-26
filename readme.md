@@ -9,7 +9,7 @@
 
 # 🎓 Scholarship Management System
 
-A full-stack web application designed to simplify scholarship discovery, application, and management. This platform supports multiple user roles including Students, Moderators, and Admins.
+A full-stack web application designed to simplify scholarship discovery, application, and management. This platform supports multiple user roles including Students, Moderators, and Admins.This website is fully Responsive for Desktop, Teblet and Mobile Users.
 
 #Website Live Link : https://assignment-nine-f1bfd.web.app/
 
@@ -59,8 +59,9 @@ A full-stack web application designed to simplify scholarship discovery, applica
 
 
 
-##Contact 
-If you want to work with me:
+**Contact :**
+---
+**If you want to work with me:**
 
 Email: asadulff55@gmail.com
 <br/>
