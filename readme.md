@@ -54,6 +54,7 @@ A full-stack web application designed to simplify scholarship discovery, applica
 
 **Authentication:**
 - JWT (JSON Web Token)
+- Firebase Authentication
 
 ---
 
