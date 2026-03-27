@@ -62,11 +62,11 @@ A full-stack web application designed to simplify scholarship discovery, applica
 
 **Contact :**
 ---
-**If you want to work with me:**
+****If you want to work with me:**
 
 Email: asadulff55@gmail.com
 <br/>
-Portfolio: comming soon...
+Portfolio: comming soon...**
 
 ---
 
