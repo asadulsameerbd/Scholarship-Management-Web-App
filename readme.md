@@ -66,7 +66,7 @@ A full-stack web application designed to simplify scholarship discovery, applica
 
 Email: asadulff55@gmail.com
 <br/>
-Portfolio: comming soon...**
+Portfolio: coming soon...**
 
 ---
 
