@@ -44,6 +44,7 @@ A full-stack web application designed to simplify scholarship discovery, applica
 - React.js
 - Tailwind CSS
 - DaisyUI
+- HTML, CSS, JS
 
 **Backend:**
 - Node.js
